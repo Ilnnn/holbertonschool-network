@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Use 'hostname -I' to get all IP addresses assigned to the machine,
+# then use 'tr' to replace spaces with newlines to list them vertically.
+hostname -I | tr ' ' '\n'

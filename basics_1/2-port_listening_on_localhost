@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Listen on port 98 using netcat
+# -l: Listen for an incoming connection
+# -p 98: Specify the port number
+nc -l 98
