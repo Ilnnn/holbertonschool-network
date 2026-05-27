@@ -1,5 +1,4 @@
 #!/bin/bash
-
-# Use 'hostname -I' to get all IP addresses assigned to the machine,
-# then use 'tr' to replace spaces with newlines to list them vertically.
-hostname -I | tr ' ' '\n'
+# Script to display all active IPv4 addresses
+# This uses 'ip' which is the standard tool on Linux systems
+ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
