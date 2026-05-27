@@ -1,4 +1,2 @@
 #!/bin/bash
-# Displays listening ports (only servers) with PID and program name
-
-sudo netstat -lpn
+sudo ss -lntup
