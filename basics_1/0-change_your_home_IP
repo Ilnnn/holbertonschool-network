@@ -1,13 +1,16 @@
-#!/bin/bash
-# Configure /etc/hosts to redirect localhost and facebook.com
+#!/usr/bin/env bash
+# Script to update /etc/hosts for localhost and facebook.com
 
-# 1. Update localhost resolution
-# We use a regex to ensure we only replace the specific 127.0.0.1 localhost entry
-sed -i 's/^127.0.0.1[[:space:]]\+localhost/127.0.0.2\tlocalhost/' /etc/hosts
+# Update localhost: match 127.0.0.1 followed by spaces/tabs and localhost
+# We replace it with 127.0.0.2 \t localhost
+sed -i 's/127.0.0.1[[:space:]]\+localhost/127.0.0.2\tlocalhost/' /etc/hosts
 
-# 2. Add or update facebook.com resolution
+# Update or add facebook.com:
+# Look for facebook.com in the file
 if grep -q "facebook.com" /etc/hosts; then
+    # If found, replace the line with the new IP
     sed -i 's/.*facebook.com/8.8.8.8 facebook.com/' /etc/hosts
 else
+    # If not found, append it
     echo "8.8.8.8 facebook.com" >> /etc/hosts
 fi
