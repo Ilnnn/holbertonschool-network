@@ -1,25 +1,10 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
+# This script configures the host resolution by modifying /etc/hosts
 
-HOSTS_FILE="/etc/hosts"
-TMP_FILE="$(mktemp)"
+# 1. Update localhost resolution from 127.0.0.1 to 127.0.0.2
+# The 'sed' command searches for the pattern and replaces it
+sudo sed -i 's/127.0.0.1\tlocalhost/127.0.0.2\tlocalhost/' /etc/hosts
 
-cleanup() {
-  rm -f "$TMP_FILE"
-}
-trap cleanup EXIT
-
-if [ "$(id -u)" -ne 0 ]; then
-  echo "Please run as root" >&2
-  exit 1
-fi
-
-sed -E 's/^127\.0\.0\.1(\s+.*\blocalhost\b.*)/127.0.0.2\1/' "$HOSTS_FILE" | grep -Ev '\bfacebook\.com\b' > "$TMP_FILE"
-
-if ! grep -Eq '^127\.0\.0\.2(\s+.*\blocalhost\b.*)?' "$TMP_FILE"; then
-  printf '127.0.0.2 localhost\n' >> "$TMP_FILE"
-fi
-
-printf '8.8.8.8 facebook.com\n' >> "$TMP_FILE"
-
-cp "$TMP_FILE" "$HOSTS_FILE"
+# 2. Add facebook.com resolution to 8.8.8.8
+# Append the mapping entry to the end of the /etc/hosts file
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
