@@ -40,9 +40,9 @@ Retrieval: The database runs the query, fetches the necessary information, and s
 Once the response reaches your browser, the DOM is rendered, the CSS is applied, and the Google homepage appears before your eyes. You’ve just completed a journey across the globe in less time than it takes to blink!
 Press enter or click to view image in full size
 
-``
+
 <img width="1024" height="559" alt="Unknown" src="https://github.com/user-attachments/assets/d2e503e8-f916-4110-980e-ceb99f211fb1" />
-``
+
 
 How the Schema Illustrates the Journey:
 
